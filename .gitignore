@@ -1,0 +1,13 @@
+﻿################################################################################
+# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/WładcyKostek.Api/bin/Debug/net9.0
+/WładcyKostek.Api/obj
+/WładcyKostek.Api/appsettings.Development.json
+/WładcyKostek.Core/bin/Debug/net9.0
+/WładcyKostek.Core/obj
+/WładcyKostek.Core/Requests/Queries/GetNewsIdsQuery.cs
+/WładcyKostek.Repo/bin/Debug/net9.0
+/WładcyKostek.Repo/obj
