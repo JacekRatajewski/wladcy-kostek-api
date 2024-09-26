@@ -42,6 +42,6 @@ jobs:
         with:
           server: 20.82.145.167
           port: 21
-          local-dir: api/
+          server-dir: /api/
           username: ${{ secrets.ftp_acc }}
           password: ${{ secrets.ftp_password }}
