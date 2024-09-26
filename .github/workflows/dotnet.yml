@@ -49,5 +49,6 @@ jobs:
           server: 20.82.145.167
           port: 21
           server-dir: /api/
+          dangerous-clean-slate: true
           username: ${{ secrets.ftp_acc }}
           password: ${{ secrets.ftp_password }}
