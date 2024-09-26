@@ -9,16 +9,15 @@ jobs:
     name: Build Api
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x' 
+          dotnet-version: 9.0.x
       - name: Restore dependencies
-        run: dotnet restore WładcyKostek.sln
-      - name: Build the solution
-        run: dotnet build WładcyKostek.sln --configuration Release --no-restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: dist
