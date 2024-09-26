@@ -22,18 +22,18 @@ jobs:
           dotnet-version: 9.0.x
           
       - name: Clean dependencies
-        run: dotnet clean WladcyKostek.sln     
+        run: dotnet clean     
         
       - name: Restore dependencies
-        run: dotnet restore WladcyKostek.sln
+        run: dotnet restore
 
       - name: Build the solution
-        run: dotnet build WladcyKostek.sln --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
         
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: bin
-          path: /home/runner/work/wladcy-kostek-api/wladcy-kostek-api/WladcyKostek.Core/bin/Release/net9.0/
+          path: /home/runner/work/wladcy-kostek-api/wladcy-kostek-api/
   deploy:
     name: Deploy Apps
     needs: build
