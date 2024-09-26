@@ -20,3 +20,6 @@
 /WladcyKostek.Core/obj
 /WladcyKostek.Repo/bin/Release/net9.0
 /WladcyKostek.Repo/obj
+/WladcyKostek.Api/bin/Debug/net9.0
+/WladcyKostek.Core/bin/Debug/net9.0
+/WladcyKostek.Repo/bin/Debug/net9.0

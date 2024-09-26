@@ -17,7 +17,7 @@ namespace WladcyKostek.Repo.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var conStrBuilder = new SqlConnectionStringBuilder(_config.GetConnectionString("DB"));
-            conStrBuilder.Password = _config["DB_PASSWORD"];
+            conStrBuilder.Password = _config["DbPassword"];
             optionsBuilder.UseSqlServer(conStrBuilder.ConnectionString);
         }
     }

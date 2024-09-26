@@ -1,3 +1,4 @@
+using Azure.Identity;
 using Microsoft.AspNetCore.Hosting;
 using System.Data.SqlClient;
 using WladcyKostek.Core;
@@ -7,7 +8,12 @@ using WladcyKostek.Core.Workers;
 using WladcyKostek.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
+if (builder.Environment.IsProduction())
+{
+    var keyVaultEndpoint = new Uri(builder.Configuration["KeyVault:Uri"] ?? throw new InvalidOperationException("Key Vault Uri is missing"));
 
+    builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+}
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
