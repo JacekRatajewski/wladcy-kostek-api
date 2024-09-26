@@ -27,13 +27,13 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build the solution
-        run: dotnet build --configuration Release --no-restore
+      - name: Publish the solution
+        run: dotnet publish --configuration Release --no-restore
         
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: bin
-          path: /home/runner/work/wladcy-kostek-api/wladcy-kostek-api/
+          path: /home/runner/work/wladcy-kostek-api/wladcy-kostek-api/WladcyKostek.Api/bin/Release/net9.0/publish
   deploy:
     name: Deploy Apps
     needs: build
