@@ -11,3 +11,6 @@
 /WładcyKostek.Core/Requests/Queries/GetNewsIdsQuery.cs
 /WładcyKostek.Repo/bin/Debug/net9.0
 /WładcyKostek.Repo/obj
+/WładcyKostek.Api/bin/Release/net9.0
+/WładcyKostek.Core/bin/Release/net9.0
+/WładcyKostek.Repo/bin/Release/net9.0
