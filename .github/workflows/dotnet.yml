@@ -27,7 +27,7 @@ jobs:
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: bin
-          path: bin/Release/net9.0
+          path: home/runner/work/wladcy-kostek-api/wladcy-kostek-api/WladcyKostek.Core/bin/Release/net9.0
   deploy:
     name: Deploy Apps
     needs: build
