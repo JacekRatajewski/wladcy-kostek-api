@@ -10,19 +10,15 @@ namespace WladcyKostek.Repo.Context
     {
         public IConfiguration _config { get; set; }
 
-        private ILogger _logger;
-
         public DbSet<News> News { get; set; }
-        public DatabaseContext(IConfiguration config, ILogger logger)
+        public DatabaseContext(IConfiguration config)
         {
             _config = config;
-            _logger = logger;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var conStrBuilder = new SqlConnectionStringBuilder(_config.GetConnectionString("DB"));
-            _logger.LogInformation($"DB: {_config["DbPassword"]}, OPENAI: {_config["OpenAiKey"]}");
             conStrBuilder.Password = _config["DbPassword"];
             optionsBuilder.UseSqlServer(conStrBuilder.ConnectionString);
         }

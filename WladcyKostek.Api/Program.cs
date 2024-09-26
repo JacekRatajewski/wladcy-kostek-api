@@ -21,6 +21,7 @@ else
 {
     Log.Logger.Information("Running in Development!");
 }
+Log.Logger.Information($"DB: {builder.Configuration["DbPassword"]}, OPENAI: {builder.Configuration["OpenAiKey"]}");
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
