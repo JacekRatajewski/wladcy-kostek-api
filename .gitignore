@@ -14,3 +14,9 @@
 /WładcyKostek.Api/bin/Release/net9.0
 /WładcyKostek.Core/bin/Release/net9.0
 /WładcyKostek.Repo/bin/Release/net9.0
+/WladcyKostek.Api/bin/Release/net9.0
+/WladcyKostek.Api/obj
+/WladcyKostek.Core/bin/Release/net9.0
+/WladcyKostek.Core/obj
+/WladcyKostek.Repo/bin/Release/net9.0
+/WladcyKostek.Repo/obj

@@ -1,6 +1,0 @@
-@WładcyKostek.Api_HostAddress = http://localhost:5044
-
-GET {{WładcyKostek.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
