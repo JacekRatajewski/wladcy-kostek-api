@@ -16,9 +16,9 @@ jobs:
         with:
           dotnet-version: '9.0.x' 
       - name: Restore dependencies
-        run: dotnet restore MyApp.sln
+        run: dotnet restore WładcyKostek.sln
       - name: Build the solution
-        run: dotnet build MyApp.sln --configuration Release --no-restore
+        run: dotnet build WładcyKostek.sln --configuration Release --no-restore
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: dist
