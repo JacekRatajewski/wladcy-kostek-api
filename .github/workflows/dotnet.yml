@@ -14,11 +14,15 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
+          
+      - name: Clean dependencies
+        run: dotnet clean WladcyKostek.sln     
+        
       - name: Restore dependencies
-        run: dotnet restore WładcyKostek.Api/WładcyKostek.Api.csproj
+        run: dotnet restore WladcyKostek.sln
 
       - name: Build the solution
-        run: dotnet build WładcyKostek.Api/WładcyKostek.Api.csproj --configuration Release --no-restore
+        run: dotnet build WladcyKostek.sln --configuration Release --no-restore
         
       - uses: actions/upload-artifact@v4.3.3
         with:
