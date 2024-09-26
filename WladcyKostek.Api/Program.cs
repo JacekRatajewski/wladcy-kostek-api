@@ -1,18 +1,25 @@
 using Azure.Identity;
-using Microsoft.AspNetCore.Hosting;
-using System.Data.SqlClient;
+using Serilog;
 using WladcyKostek.Core;
 using WladcyKostek.Core.Hubs;
-using WladcyKostek.Core.Interfaces;
 using WladcyKostek.Core.Workers;
 using WladcyKostek.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+builder.Host.UseSerilog();
 if (builder.Environment.IsProduction())
 {
+    Log.Logger.Information("Running in Production!");
     var keyVaultEndpoint = new Uri(builder.Configuration["KeyVault:Uri"] ?? throw new InvalidOperationException("Key Vault Uri is missing"));
 
     builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+}
+else
+{
+    Log.Logger.Information("Running in Development!");
 }
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
