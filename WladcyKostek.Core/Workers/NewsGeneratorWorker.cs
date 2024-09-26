@@ -58,6 +58,7 @@ namespace WladcyKostek.Core.Workers
         {
             var news = await _newsRepository.GenerateNewsAsync();
             await _newsRepository.AddNewsAsync(news);
+            _logger.LogInformation($"NewsGeneratorWorker added: [{news.Count}].");
         }
     }
 }

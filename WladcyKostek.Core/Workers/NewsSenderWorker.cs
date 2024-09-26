@@ -66,6 +66,7 @@ namespace WladcyKostek.Core.Workers
                 var news = await _newsRepository.GetSingleNewsAsync(newsId);
                 await _newsRepository.SetNewsAsSentAsync(newsId);
                 await _hubContext.Clients.All.SendAsync("NewPost", news);
+                _logger.LogInformation($"NewsSenderWorker sent: [{newsId}].");
                 await Task.Delay(TimeSpan.FromSeconds(new Random().Next(30, 120)));
             }
         }
