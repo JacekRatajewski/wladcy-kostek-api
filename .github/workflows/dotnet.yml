@@ -26,8 +26,8 @@ jobs:
         
       - uses: actions/upload-artifact@v4.3.3
         with:
-          name: dist
-          path: bin/Release/net9.0/publish
+          name: bin
+          path: bin/Release/net9.0
   deploy:
     name: Deploy Apps
     needs: build
@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4.1.7
         with:
-          name: dist
+          name: bin
           path: .
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
