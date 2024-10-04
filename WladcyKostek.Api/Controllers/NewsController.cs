@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WladcyKostek.Core.Requests.Queries;
+using WladcyKostek.Core.Requests.Commands;
 
 namespace WladcyKostek.Api.Controllers
 {
@@ -17,17 +17,10 @@ namespace WladcyKostek.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetNewsIds()
+        [HttpPost]
+        public async Task<IActionResult> PostNews([FromBody] AddNewsCommand command)
         {
-            var response = await _mediator.Send(new GetNewsIdsQuery());
-            return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetNews(int id)
-        {
-            var response = await _mediator.Send(new GetNewsQuery { Id = id });
+            var response = await _mediator.Send(command);
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
     }

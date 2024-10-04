@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Requests\Commands\" />
-    <Folder Include="Handlers\Commands\" />
+    <Folder Include="Handlers\Queries\" />
+    <Folder Include="Requests\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

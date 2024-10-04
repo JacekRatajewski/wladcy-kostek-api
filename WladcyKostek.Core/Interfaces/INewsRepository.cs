@@ -9,5 +9,6 @@ namespace WladcyKostek.Core.Interfaces
         public Task SetNewsAsSentAsync(int id);
         public Task<List<NewsDTO>> GenerateNewsAsync();
         public Task AddNewsAsync(List<NewsDTO> news);
+        public Task<int> AddSingleNewsAsync(NewsDTO news);
     }
 }

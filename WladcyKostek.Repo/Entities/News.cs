@@ -12,5 +12,6 @@ namespace WladcyKostek.Repo.Entities
         public string? UserId { get; set; }
         public DateTime? DateTime { get; set; }
         public bool Sent { get; set; }
+        public string? VideoUrl { get; set; }
     }
 }

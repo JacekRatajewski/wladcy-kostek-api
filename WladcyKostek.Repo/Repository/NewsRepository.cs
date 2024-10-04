@@ -64,21 +64,14 @@ namespace WladcyKostek.Repo.Repository
                         new ChatMessage(ChatMessageRole.User, $"Wszystko po polsku. Wygeneruj króciutki post użytkownika {user} podczas apokalipsy zombie na portalu społecznościowym Watch The World Burn, wybierz ulicę na której dzieje się akcja w mieście {_city} w Polsce. Jest godzina: {DateTime.Now.ToString("HH:mm")}. W formacie json z parametrami: Title, Message")
                     }
                 });
-                var image = await _http.ImageGenerations.CreateImageAsync(new ImageGenerationRequest($"A drawing of avatar for user: {user}, colors: red, black, grey. Zombie Apocalypse vibe.", 1, ImageSize._256));
-                var imageUrl = image.Data[0].Url;
-                string base64Image;
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
-                    base64Image = Convert.ToBase64String(imageBytes);
-                }
+                var image = await _http.ImageGenerations.CreateImageAsync(new ImageGenerationRequest($"A detailed and textured science-fiction avatar for the user '{user}', featuring a zombie-like characte. Grey, Red, Black color palette. The character is standing in an exaggerated, powerful pose. The textures should give a sense of depth and complexity. The style should evoke a sense of fantasy and science fiction, with strong, dynamic lines and rich shading.", 1, ImageSize._256));
                 if (post.Choices.Count > 0)
                 {
                     var json = post.Choices[0].Message.TextContent.Split("json")[1].Split("```")[0];
                     var _post = JsonSerializer.Deserialize<NewsDTO>(json);
                     _post.DateTime = DateTime.Now;
                     _post.UserId = user;
-                    _post.ImageBase64 = base64Image;
+                    _post.ImageBase64 = image.Data[0].Url;
                     posts.Add(_post);
                 }
             }
@@ -114,7 +107,8 @@ namespace WladcyKostek.Repo.Repository
                 Message = _news.Message,
                 Title = _news.Title,
                 UserId = _news.UserId,
-                ImageBase64 = _news.ImageBase64
+                ImageBase64 = _news.ImageBase64,
+                VideoUrl = _news.VideoUrl
             };
         }
 
@@ -127,6 +121,23 @@ namespace WladcyKostek.Repo.Repository
             }
             _news.Sent = true;
             await _database.SaveChangesAsync();
+        }
+
+        public async Task<int> AddSingleNewsAsync(NewsDTO news)
+        {
+            var _news = new News
+            {
+                DateTime = news.DateTime,
+                Message = news.Message,
+                Title = news.Title,
+                UserId = news.UserId,
+                ImageBase64 = news.ImageBase64,
+                VideoUrl = news.VideoUrl,
+                Sent = false
+            };
+            await _database.News.AddAsync(_news);
+            await _database.SaveChangesAsync();
+            return _news.Id;
         }
     }
 }
