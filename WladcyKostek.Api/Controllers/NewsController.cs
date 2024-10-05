@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WladcyKostek.Core.Requests.Commands;
 
@@ -17,6 +18,7 @@ namespace WladcyKostek.Api.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostNews([FromBody] AddNewsCommand command)
         {
