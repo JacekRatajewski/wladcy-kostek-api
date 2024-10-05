@@ -49,7 +49,7 @@ jobs:
           host: 20.82.145.167
           user: ${{ secrets.ftp_acc }}
           password: ${{ secrets.ftp_password }}
-          exclude: '["Azure.Core.dll"]'
+          exclude: '["api/Azure.Core.dll", "rpg-butler", "zombie-map", "wladcy-kostek-app", ".ftp-deploy-sync-state.json"]'
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
