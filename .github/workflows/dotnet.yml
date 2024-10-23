@@ -43,6 +43,13 @@ jobs:
         with:
           name: bin
           path: .
+      - name: FTP Clean
+        uses: taylorgibb/ftp-clean@v2.0.3
+        with:
+          host: 20.82.145.167
+          user: ${{ secrets.ftp_acc }}
+          password: ${{ secrets.ftp_password }}
+          exclude: '["api/Azure.Core.dll", "rpg-butler", "zombie-map", "wladcy-kostek-app", ".ftp-deploy-sync-state.json"]'
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
