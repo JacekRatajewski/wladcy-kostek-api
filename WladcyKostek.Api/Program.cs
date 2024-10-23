@@ -41,16 +41,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddControllers();
-builder.Services.AddCors(options =>
+if (builder.Environment.IsProduction())
 {
-    options.AddDefaultPolicy(builder =>
+    builder.Services.AddCors(options =>
     {
-        builder.WithOrigins("http://localhost:4200") // adres frontendowej aplikacji
-               .AllowAnyHeader()
-               .AllowAnyMethod()
-               .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("https://wtwb.xyz") // adres frontendowej aplikacji
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+        });
     });
-});
+}
+else
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("http://localhost:4200") // adres frontendowej aplikacji
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+        });
+    });
+}
+
 
 
 
