@@ -99,9 +99,10 @@ app.UseSwaggerUI(options =>
 });
 app.MapOpenApi();
 
-
-//app.UseHttpsRedirection();
-
+if (app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 app.UseAuthorization();
 app.UseCors();
 app.MapHub<NewsHub>("/newsHub");
