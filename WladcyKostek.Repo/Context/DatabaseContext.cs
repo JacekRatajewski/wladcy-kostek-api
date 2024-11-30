@@ -11,6 +11,7 @@ namespace WladcyKostek.Repo.Context
         public IConfiguration _config { get; set; }
 
         public DbSet<News> News { get; set; }
+        public DbSet<Bonuses> Bonuses { get; set; }
         public DatabaseContext(IConfiguration config)
         {
             _config = config;

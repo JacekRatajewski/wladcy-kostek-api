@@ -13,6 +13,7 @@ namespace WladcyKostek.Repo
         {
             services.AddDbContext<DatabaseContext>();
             services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IBonusesRepository, BonusesRepository>();
             services.AddSingleton(new OpenAIAPI(config["OpenAiKey"]));
             return services;
         }

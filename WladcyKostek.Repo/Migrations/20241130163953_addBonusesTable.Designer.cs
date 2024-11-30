@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WladcyKostek.Repo.Context;
 
@@ -11,9 +12,11 @@ using WladcyKostek.Repo.Context;
 namespace WladcyKostek.Repo.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241130163953_addBonusesTable")]
+    partial class addBonusesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,17 +33,17 @@ namespace WladcyKostek.Repo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BonusCount")
-                        .HasColumnType("int");
+                    b.Property<string>("BonusCount")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MoneySupported")
-                        .HasColumnType("int");
+                    b.Property<string>("MoneySupported")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SessionCount")
-                        .HasColumnType("int");
+                    b.Property<string>("SessionCount")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

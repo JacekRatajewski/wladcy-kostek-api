@@ -52,6 +52,13 @@ if (builder.Environment.IsProduction())
                    .AllowAnyMethod()
                    .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
         });
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("https://wladcykostek.pl/") // adres frontendowej aplikacji
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+        });
     });
 }
 else
