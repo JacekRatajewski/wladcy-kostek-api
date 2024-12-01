@@ -47,17 +47,17 @@ if (builder.Environment.IsProduction())
     {
         options.AddDefaultPolicy(builder =>
         {
-            builder.WithOrigins("https://wtwb.xyz") // adres frontendowej aplikacji
+            builder.WithOrigins("https://wtwb.xyz")
                    .AllowAnyHeader()
                    .AllowAnyMethod()
-                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+                   .AllowCredentials();
         });
         options.AddDefaultPolicy(builder =>
         {
-            builder.WithOrigins("https://wladcykostek.pl/") // adres frontendowej aplikacji
+            builder.WithOrigins("https://wladcykostek.pl")
                    .AllowAnyHeader()
                    .AllowAnyMethod()
-                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+                   .AllowCredentials();
         });
     });
 }
@@ -67,10 +67,10 @@ else
     {
         options.AddDefaultPolicy(builder =>
         {
-            builder.WithOrigins("http://localhost:4200") // adres frontendowej aplikacji
+            builder.WithOrigins("http://localhost:4200")
                    .AllowAnyHeader()
                    .AllowAnyMethod()
-                   .AllowCredentials(); // AllowCredentials jest wymagane dla SignalR
+                   .AllowCredentials();
         });
     });
 }
