@@ -9,7 +9,7 @@ namespace WladcyKostek.Core.Interfaces
 {
     public interface IBonusesRepository
     {
-        public Task<int> GetBonusIdAsync(string name);
+        public Task<int?> GetBonusIdAsync(string name);
         public Task<BonusesDTO> GetBonusesAsync(int id);
     }
 }

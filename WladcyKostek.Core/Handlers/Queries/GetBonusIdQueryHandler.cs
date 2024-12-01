@@ -15,8 +15,15 @@ namespace WladcyKostek.Core.Requests.Queries
         {
             try
             {
-                var newsId = await _bonusesRepository.GetBonusIdAsync(request.Name);
-                return BaseResponse<int>.CreateResult(newsId);
+                var bonusId = await _bonusesRepository.GetBonusIdAsync(request.Name);
+                if (bonusId is not null)
+                {
+                    return BaseResponse<int>.CreateResult((int)bonusId);
+                }
+                else
+                {
+                    return BaseResponse<int>.CreateError("Bonus Id not found.");
+                }
             }
             catch (Exception ex)
             {

@@ -37,10 +37,10 @@ namespace WladcyKostek.Repo.Repository
             };
         }
 
-        public async Task<int> GetBonusIdAsync(string name)
+        public async Task<int?> GetBonusIdAsync(string name)
         {
-            var bonus = await _database.Bonuses.FirstOrDefaultAsync(x => x.Name == name);
-            return bonus.Id;
+            var bonus = await _database.Bonuses.Where(b => EF.Functions.Collate(b.Name, "SQL_Latin1_General_CP1_CI_AI") == name).FirstOrDefaultAsync();
+            return bonus?.Id;
         }
     }
 }
