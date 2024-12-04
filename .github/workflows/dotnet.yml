@@ -9,7 +9,7 @@ on:
           default: 'warning'
   push:
     branches:
-    - master
+    - publish
 jobs:
   build:
     name: Build Api
