@@ -26,7 +26,11 @@ namespace WladcyKostek.Repo.Repository
 
         public async Task<BonusesDTO> GetBonusesAsync(int id)
         {
-            var bonus = await _database.Bonuses.FirstOrDefaultAsync(x => x.Id == id);
+            var bonus = await _database.Bonuses.FirstOrDefaultAsync(x => x.Id == id && x.IsPublic == true);
+            if(bonus is null)
+            {
+                throw new Exception("User not added or not public!");
+            }
             return new BonusesDTO
             {
                 Id = id,
