@@ -37,7 +37,8 @@ namespace WladcyKostek.Repo.Repository
                 Name = bonus.Name,
                 BonusCount = bonus.BonusCount,
                 MoneySupported = bonus.MoneySupported,
-                SessionCount = bonus.SessionCount
+                SessionCount = bonus.SessionCount,
+                PlayerSeasonStart = bonus.PlayerSeasonStart
             };
         }
 
