@@ -17,7 +17,7 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
             foreach (var article in articles)
             {
                 var title = article.SelectSingleNode(".//h3[@class='entry-title mh-loop-title']/a")?.InnerText.Trim();
-                var description = article.SelectSingleNode(".//div[@class='mh-loop-excerpt']/div/p")?.InnerText.Trim();
+                var description = article.SelectSingleNode(".//div[@class='mh-loop-excerpt']/div/p")?.InnerText.Trim().Replace("[&#8230;]", "");
                 var imageUrl = article.SelectSingleNode(".//figure[@class='mh-loop-thumb']/a/img")?.GetAttributeValue("src", null);
                 var url = article.SelectSingleNode(".//h3[@class='entry-title mh-loop-title']/a")?.GetAttributeValue("href", null);
                 scrappedNews.Add(new ScrappedNews
