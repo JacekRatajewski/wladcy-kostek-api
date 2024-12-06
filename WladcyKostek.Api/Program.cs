@@ -136,13 +136,13 @@ builder.Services.Configure<NewsScrapperWorkerOptions>("PenAndPaperScrapper", opt
     options.Scrapper = new PenAndPaperScrapper();
 });
 
-builder.Services.AddHostedService<NewsScrapperWorker>(sp =>
+builder.Services.AddSingleton<IHostedService>(sp =>
 {
     var options = sp.GetRequiredService<IOptionsMonitor<NewsScrapperWorkerOptions>>().Get("RpgNewsScrapper");
     return ActivatorUtilities.CreateInstance<NewsScrapperWorker>(sp, Options.Create(options));
 });
 
-builder.Services.AddHostedService<NewsScrapperWorker>(sp =>
+builder.Services.AddSingleton<IHostedService>(sp =>
 {
     var options = sp.GetRequiredService<IOptionsMonitor<NewsScrapperWorkerOptions>>().Get("PenAndPaperScrapper");
     return ActivatorUtilities.CreateInstance<NewsScrapperWorker>(sp, Options.Create(options));
