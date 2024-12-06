@@ -27,7 +27,7 @@ namespace WladcyKostek.Core.Handlers.Commands
                     FromGoogle = false
                 };
                 var created = await _userRepository.Register(newUser);
-                if (created)
+                if (created is not null)
                     return BaseResponse<bool>.CreateResult(true);
                 return BaseResponse<bool>.CreateResult(false);
             }

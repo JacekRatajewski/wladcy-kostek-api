@@ -6,7 +6,7 @@ using WladcyKostek.Core.Requests.Commands;
 
 namespace WladcyKostek.Core.Handlers.Commands
 {
-    internal class LoginGoogleCommandHandler : IRequestHandler<LoginGoogleCommand, BaseResponse<bool>>
+    internal class LoginGoogleCommandHandler : IRequestHandler<LoginGoogleCommand, BaseResponse<UserDTO?>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -15,7 +15,7 @@ namespace WladcyKostek.Core.Handlers.Commands
             _userRepository = userRepository;
         }
 
-        public async Task<BaseResponse<bool>> Handle(LoginGoogleCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<UserDTO?>> Handle(LoginGoogleCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -27,8 +27,8 @@ namespace WladcyKostek.Core.Handlers.Commands
                 if (user is not null)
                 {
                     if (payload is not null)
-                        return BaseResponse<bool>.CreateResult(true);
-                    return BaseResponse<bool>.CreateResult(false);
+                        return BaseResponse<UserDTO?>.CreateResult(user);
+                    return BaseResponse<UserDTO?>.CreateResult(null);
                 }
 
                 var newUser = new UserDTO
@@ -38,14 +38,14 @@ namespace WladcyKostek.Core.Handlers.Commands
                     FromGoogle = true,
                     Token = request.Token,
                 };
-                var created = await _userRepository.Register(newUser);
-                if (created)
-                    return BaseResponse<bool>.CreateResult(true);
-                return BaseResponse<bool>.CreateResult(false);
+                var createdUser = await _userRepository.Register(newUser);
+                if (createdUser is not null)
+                    return BaseResponse<UserDTO?>.CreateResult(createdUser);
+                return BaseResponse<UserDTO?>.CreateResult(null);
             }
             catch (Exception ex)
             {
-                return BaseResponse<bool>.CreateError(ex.Message);
+                return BaseResponse<UserDTO?>.CreateError(ex.Message);
             }
         }
     }

@@ -11,6 +11,6 @@ namespace WladcyKostek.Core.Interfaces
     {
         Task<UserDTO?> GetUserByLoginAsync(string? login);
         Task<UserDTO?> GetUserByTokenAsync(string? token);
-        Task<bool> Register(UserDTO newUser);
+        Task<UserDTO?> Register(UserDTO newUser);
     }
 }

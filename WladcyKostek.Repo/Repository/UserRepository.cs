@@ -26,7 +26,6 @@ namespace WladcyKostek.Repo.Repository
                     Login = user.Login,
                     Email = user.Email,
                     FromGoogle = user.FromGoogle,
-                    Token = user.Token,
                     AccountCreationDate = user.AccountCreationDate,
                 };
             }
@@ -43,16 +42,15 @@ namespace WladcyKostek.Repo.Repository
                     Login = user.Login,
                     Email = user.Email,
                     FromGoogle = user.FromGoogle,
-                    Token = user.Token,
                     AccountCreationDate = user.AccountCreationDate,
                 };
             }
             return null;
         }
 
-        public async Task<bool> Register(UserDTO newUser)
+        public async Task<UserDTO?> Register(UserDTO newUser)
         {
-            await _database.Users.AddAsync(new User
+            var userId = await _database.Users.AddAsync(new User
             {
                 Password = newUser.Password,
                 AccountCreationDate = DateTime.UtcNow,
@@ -61,7 +59,22 @@ namespace WladcyKostek.Repo.Repository
                 Login = newUser.Login
             });
             var added = await _database.SaveChangesAsync();
-            return added > 0;
+            if (added > 0)
+            {
+                var user = await _database.Users.FirstOrDefaultAsync(x => x.Id == userId.Entity.Id);
+                if (user is not null)
+                {
+                    return new UserDTO
+                    {
+                        Login = user.Login,
+                        Email = user.Email,
+                        FromGoogle = user.FromGoogle,
+                        AccountCreationDate = user.AccountCreationDate,
+                    };
+                }
+                return null;
+            };
+            return null;
         }
     }
 }
