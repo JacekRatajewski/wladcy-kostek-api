@@ -19,7 +19,7 @@ namespace WladcyKostek.Api.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Jwt")]
         [HttpGet("by/{name}")]
         public async Task<IActionResult> GetBonuses(string name)
         {
@@ -27,7 +27,7 @@ namespace WladcyKostek.Api.Controllers
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Jwt")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBonusId(string id)
         {

@@ -1,46 +1,44 @@
-using Google.Apis.Auth;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WladcyKostek.Core.Requests.Commands;
 using WladcyKostek.Core.Requests.Queries;
 
 namespace WladcyKostek.Api.Controllers
 {
     [ApiController]
-    [Route("auth")]
-    public class AuthController : ControllerBase
+    [Route("scrappedNews")]
+    public class ScrappedNewsController : ControllerBase
     {
-        private readonly ILogger<AuthController> _logger;
+        private readonly ILogger<NewsController> _logger;
         private readonly IMediator _mediator;
 
-        public AuthController(ILogger<AuthController> logger, IMediator mediator)
+        public ScrappedNewsController(ILogger<NewsController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
 
         [Authorize(AuthenticationSchemes = "Jwt")]
-        [HttpPost("google-login")]
-        public async Task<IActionResult> PostGoogleLogin([FromBody] string token)
+        [HttpGet]
+        public async Task<IActionResult> GetNews()
         {
-            var response = await _mediator.Send(new LoginGoogleCommand { Token = token });
+            var response = await _mediator.Send(new GetScrappedNewsTop6Query());
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
 
         [Authorize(AuthenticationSchemes = "Jwt")]
-        [HttpPost("login")]
-        public async Task<IActionResult> PostLogin([FromBody] LoginCommand command)
+        [HttpGet("more")]
+        public async Task<IActionResult> GetMoreNews()
         {
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(new GetScrappedNewsAllSkip6Query());
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
 
         [Authorize(AuthenticationSchemes = "Jwt")]
-        [HttpPost("register")]
-        public async Task<IActionResult> PostRegister([FromBody] RegisterCommand command)
+        [HttpGet("all")]
+        public async Task<IActionResult> GetNewsAll()
         {
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(new GetScrappedNewsAllQuery());
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
     }

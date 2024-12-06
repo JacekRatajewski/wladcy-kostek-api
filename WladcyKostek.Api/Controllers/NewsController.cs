@@ -18,7 +18,7 @@ namespace WladcyKostek.Api.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Jwt")]
         [HttpPost]
         public async Task<IActionResult> PostNews([FromBody] AddNewsCommand command)
         {
