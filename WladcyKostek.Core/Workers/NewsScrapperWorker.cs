@@ -63,7 +63,10 @@ namespace WladcyKostek.Core.Workers
             {
                 var news = await _scrapper.Run(_options.Scrapper, _options.Url);
                 if (news is not null)
+                {
+                    _logger.LogInformation($"NewsScrapperWorker foun {news.Count} new rpg news!");
                     await _newsRepository.AddNewsAsync(news);
+                }
             }
         }
     }

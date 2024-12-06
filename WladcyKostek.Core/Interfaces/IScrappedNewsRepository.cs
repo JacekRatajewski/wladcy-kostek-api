@@ -10,7 +10,7 @@ namespace WladcyKostek.Core.Interfaces
 {
     public interface IScrappedNewsRepository
     {
-        public Task AddNewsAsync(List<IScrappedNews> news);
+        public Task AddNewsAsync(List<ScrappedNews> news);
         public Task<List<ScrappedNewsDTO>> GetTop6Async();
         public Task<List<ScrappedNewsDTO>> GetAllSkip6Async();
         public Task<List<ScrappedNewsDTO>> GetAllAsync();

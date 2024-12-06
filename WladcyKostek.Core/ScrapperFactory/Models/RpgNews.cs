@@ -2,21 +2,16 @@
 {
     internal class RpgNews : INews
     {
-        private List<dynamic> scrappedNews;
+        private List<ScrappedNews> scrappedNews;
 
-        public RpgNews(List<dynamic> _scrappedNews)
+        public RpgNews(List<ScrappedNews> _scrappedNews)
         {
             scrappedNews = _scrappedNews;
         }
 
-        public List<IScrappedNews> MapNewsData()
+        public List<ScrappedNews> GetNews()
         {
-            List<IScrappedNews> _scrappedNews = [];
-            foreach (var news in scrappedNews)
-            {
-                _scrappedNews.Add(news);
-            }
-            return _scrappedNews;
+            return scrappedNews;
         }
     }
 }

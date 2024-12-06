@@ -8,6 +8,6 @@ namespace WladcyKostek.Core.ScrapperFactory.Models
 {
     public interface INews
     {
-        List<IScrappedNews> MapNewsData();
+        public List<ScrappedNews> GetNews();
     }
 }

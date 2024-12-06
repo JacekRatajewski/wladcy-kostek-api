@@ -13,7 +13,7 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
         public override INews ScrapHtmlPage(HtmlDocument document)
         {
             var articles = document.DocumentNode.SelectNodes("//article");
-            List<dynamic> scrappedNews = [];
+            List<ScrappedNews> scrappedNews = [];
             foreach (var article in articles)
             {
                 var title = article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText.Trim();
@@ -21,7 +21,7 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
                 var description = article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText.Trim();
                 var style = article.SelectSingleNode(".//div[@class='mg-post-thumb back-img md']")?.GetAttributeValue("style", null);
                 var imageUrl = ExtractImageUrlFromStyle(style);
-                scrappedNews.Add(new
+                scrappedNews.Add(new ScrappedNews
                 {
                     Title = title,
                     Description = description,

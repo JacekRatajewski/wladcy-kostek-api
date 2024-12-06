@@ -16,7 +16,7 @@ namespace WladcyKostek.Repo.Repository
             _database = database;
         }
 
-        public async Task AddNewsAsync(List<IScrappedNews> news)
+        public async Task AddNewsAsync(List<Core.ScrapperFactory.Models.ScrappedNews> news)
         {
             var existingTitles = await _database.ScrappedNews
                 .Select(n => n.Title)
@@ -24,7 +24,7 @@ namespace WladcyKostek.Repo.Repository
 
             var newNews = news
                 .Where(n => !existingTitles.Contains(n.Title))
-                .Select(i => new ScrappedNews
+                .Select(i => new Entities.ScrappedNews
                 {
                     Description = i.Description,
                     ImageUrl = i.ImageUrl,

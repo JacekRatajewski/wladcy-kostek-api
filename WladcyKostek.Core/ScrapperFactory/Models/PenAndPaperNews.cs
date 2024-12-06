@@ -2,21 +2,16 @@
 {
     internal class PenAndPaperNews : INews
     {
-        private List<dynamic> scrappedNews;
+        public List<ScrappedNews> scrappedNews;
 
-        public PenAndPaperNews(List<dynamic> _scrappedNews)
+        public PenAndPaperNews(List<ScrappedNews> _scrappedNews)
         {
             scrappedNews = _scrappedNews;
         }
 
-        public List<IScrappedNews> MapNewsData()
+        public List<ScrappedNews> GetNews()
         {
-            List<IScrappedNews> _scrappedNews = [];
-            foreach (var news in scrappedNews)
-            {
-                _scrappedNews.Add(news);
-            }
-            return _scrappedNews;
+            return scrappedNews;
         }
     }
 }
