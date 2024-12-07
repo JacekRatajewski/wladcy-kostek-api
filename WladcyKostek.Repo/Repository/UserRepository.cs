@@ -27,6 +27,7 @@ namespace WladcyKostek.Repo.Repository
                     Email = user.Email,
                     FromGoogle = user.FromGoogle,
                     AccountCreationDate = user.AccountCreationDate,
+                    AvatarUrl = user.AvatarUrl
                 };
             }
             return null;
@@ -43,6 +44,7 @@ namespace WladcyKostek.Repo.Repository
                     Email = user.Email,
                     FromGoogle = user.FromGoogle,
                     AccountCreationDate = user.AccountCreationDate,
+                    AvatarUrl = user.AvatarUrl
                 };
             }
             return null;
@@ -56,7 +58,9 @@ namespace WladcyKostek.Repo.Repository
                 AccountCreationDate = DateTime.UtcNow,
                 Email = newUser.Email,
                 FromGoogle = newUser.FromGoogle,
-                Login = newUser.Login
+                Login = newUser.Login,
+                Token = newUser.Token,
+                AvatarUrl = newUser.AvatarUrl
             });
             var added = await _database.SaveChangesAsync();
             if (added > 0)
@@ -70,6 +74,7 @@ namespace WladcyKostek.Repo.Repository
                         Email = user.Email,
                         FromGoogle = user.FromGoogle,
                         AccountCreationDate = user.AccountCreationDate,
+                        AvatarUrl = user.AvatarUrl
                     };
                 }
                 return null;

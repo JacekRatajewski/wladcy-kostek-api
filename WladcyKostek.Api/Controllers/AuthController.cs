@@ -20,11 +20,10 @@ namespace WladcyKostek.Api.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(AuthenticationSchemes = "Jwt")]
-        [HttpPost("google-login")]
-        public async Task<IActionResult> PostGoogleLogin([FromBody] string token)
+        [HttpPost("google")]
+        public async Task<IActionResult> PostGoogleLogin([FromBody] LoginGoogleCommand command)
         {
-            var response = await _mediator.Send(new LoginGoogleCommand { Token = token });
+            var response = await _mediator.Send(command);
             return response.ErrorCode != System.Net.HttpStatusCode.OK ? NotFound(response) : Ok(response);
         }
 

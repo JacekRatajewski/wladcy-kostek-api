@@ -10,5 +10,6 @@ namespace WladcyKostek.Core.Requests.Commands
     public class LoginGoogleCommand : IRequest<BaseResponse<UserDTO?>>
     {
         public string? Token { get; set; }
+        public string? Id { get; set; }
     }
 }

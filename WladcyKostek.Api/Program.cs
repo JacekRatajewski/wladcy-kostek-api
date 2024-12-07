@@ -29,11 +29,7 @@ else
     Log.Logger.Information("Running in Development!");
 }
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer("Jwt", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -46,7 +42,12 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtKey"]))
     };
+}).AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["GoogleClientId"];
+    googleOptions.ClientSecret = builder.Configuration["GoogleSecret"];
 });
+
 
 builder.Services.AddControllers();
 if (builder.Environment.IsProduction())

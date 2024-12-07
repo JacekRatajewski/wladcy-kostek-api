@@ -19,11 +19,8 @@ namespace WladcyKostek.Core.Handlers.Commands
         {
             try
             {
-                var user = await _userRepository.GetUserByTokenAsync(request.Token);
-                var payload = await GoogleJsonWebSignature.ValidateAsync(request.Token, new GoogleJsonWebSignature.ValidationSettings
-                {
-                    Audience = new[] { "785762715682-uf4drlm36f5ohrvgtbhd3aae7o3lcbhe.apps.googleusercontent.com" }
-                });
+                var user = await _userRepository.GetUserByTokenAsync(request.Id);
+                var payload = await GoogleJsonWebSignature.ValidateAsync(request.Token);
                 if (user is not null)
                 {
                     if (payload is not null)
@@ -36,7 +33,8 @@ namespace WladcyKostek.Core.Handlers.Commands
                     Login = payload.Name,
                     Email = payload.Email,
                     FromGoogle = true,
-                    Token = request.Token,
+                    AvatarUrl = payload.Picture,
+                    Token = request.Id,
                 };
                 var createdUser = await _userRepository.Register(newUser);
                 if (createdUser is not null)
