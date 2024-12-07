@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WladcyKostek.Core.ScrapperFactory.Models;
 
@@ -16,9 +17,10 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
             List<ScrappedNews> scrappedNews = [];
             foreach (var article in articles)
             {
-                var title = article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText.Trim();
+                var pattern = @"&#\d+;";
+                var title = Regex.Replace(article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText.Trim(), pattern, " ");
+                var description = Regex.Replace(article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText.Trim(), pattern, " ");
                 var url = article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.GetAttributeValue("href", null);
-                var description = article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText.Trim();
                 var style = article.SelectSingleNode(".//div[@class='mg-post-thumb back-img md']")?.GetAttributeValue("style", null);
                 var imageUrl = ExtractImageUrlFromStyle(style);
                 scrappedNews.Add(new ScrappedNews

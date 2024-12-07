@@ -121,6 +121,14 @@ builder.Services.AddSingleton<Scrapper>();
 builder.Services.AddHostedService<NewsGeneratorWorker>();
 builder.Services.AddHostedService<NewsSenderWorker>();
 
+builder.Services.Configure<NewsScrapperWorkerOptions>("RpgNewsScrapper", options =>
+{
+    options.TimerIntervalHours = TimeSpan.FromHours(int.Parse(builder.Configuration.GetSection("Workers").GetSection("NewsScrapperWorkerTimer").Value));
+    options.IsEnabled = bool.Parse(builder.Configuration.GetSection("Workers").GetSection("IsNewsScrapperWorkerEnabled").Value);
+    options.Url = "http://rpgnews.com/";
+    options.Scrapper = new RpgNewsScrapper();
+});
+
 builder.Services.Configure<NewsScrapperWorkerOptions>("PenAndPaperScrapper", options =>
 {
     options.TimerIntervalHours = TimeSpan.FromHours(int.Parse(builder.Configuration.GetSection("Workers").GetSection("NewsScrapperWorkerTimer").Value));
@@ -132,6 +140,12 @@ builder.Services.Configure<NewsScrapperWorkerOptions>("PenAndPaperScrapper", opt
 builder.Services.AddSingleton<IHostedService>(sp =>
 {
     var options = sp.GetRequiredService<IOptionsMonitor<NewsScrapperWorkerOptions>>().Get("PenAndPaperScrapper");
+    return ActivatorUtilities.CreateInstance<NewsScrapperWorker>(sp, Options.Create(options));
+});
+
+builder.Services.AddSingleton<IHostedService>(sp =>
+{
+    var options = sp.GetRequiredService<IOptionsMonitor<NewsScrapperWorkerOptions>>().Get("RpgNewsScrapper");
     return ActivatorUtilities.CreateInstance<NewsScrapperWorker>(sp, Options.Create(options));
 });
 
