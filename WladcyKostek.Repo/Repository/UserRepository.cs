@@ -27,7 +27,8 @@ namespace WladcyKostek.Repo.Repository
                     Email = user.Email,
                     FromGoogle = user.FromGoogle,
                     AccountCreationDate = user.AccountCreationDate,
-                    AvatarUrl = user.AvatarUrl
+                    AvatarUrl = user.AvatarUrl,
+                    Password = user.Password
                 };
             }
             return null;

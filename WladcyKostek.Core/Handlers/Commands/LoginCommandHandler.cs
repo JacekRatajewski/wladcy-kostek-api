@@ -24,7 +24,13 @@ namespace WladcyKostek.Core.Handlers.Commands
                 {
                     if (user.Password == request.Password)
                     {
-                        return BaseResponse<UserDTO?>.CreateResult(user);
+                        return BaseResponse<UserDTO?>.CreateResult(new UserDTO { 
+                            Login = user.Login,
+                            AvatarUrl = user.AvatarUrl,
+                            AccountCreationDate = user.AccountCreationDate,
+                            FromGoogle = user.FromGoogle,
+                            Email = user.Email
+                        });
                     }
                 }
                 return BaseResponse<UserDTO?>.CreateResult(null);

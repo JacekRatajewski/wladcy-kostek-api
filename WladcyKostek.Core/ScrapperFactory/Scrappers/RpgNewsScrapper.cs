@@ -17,7 +17,7 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
             List<ScrappedNews> scrappedNews = [];
             foreach (var article in articles)
             {
-                var pattern = @"&#\d+;";
+                var pattern = @"&\d+;";
                 var title = Regex.Replace(article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText?.Trim() ?? "", pattern, "");
                 var description = Regex.Replace(article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText?.Trim() ?? "", pattern, "");
                 var url = article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.GetAttributeValue("href", null);
