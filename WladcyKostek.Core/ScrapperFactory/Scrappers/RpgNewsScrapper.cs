@@ -18,8 +18,8 @@ namespace WladcyKostek.Core.ScrapperFactory.Scrappers
             foreach (var article in articles)
             {
                 var pattern = @"&#\d+;";
-                var title = Regex.Replace(article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText.Trim(), pattern, "");
-                var description = Regex.Replace(article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText.Trim(), pattern, "");
+                var title = Regex.Replace(article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.InnerText?.Trim() ?? "", pattern, "");
+                var description = Regex.Replace(article.SelectSingleNode(".//div[@class='mg-content']/p")?.InnerText?.Trim() ?? "", pattern, "");
                 var url = article.SelectSingleNode(".//h4[@class='entry-title title']/a")?.GetAttributeValue("href", null);
                 var style = article.SelectSingleNode(".//div[@class='mg-post-thumb back-img md']")?.GetAttributeValue("style", null);
                 var imageUrl = ExtractImageUrlFromStyle(style);
