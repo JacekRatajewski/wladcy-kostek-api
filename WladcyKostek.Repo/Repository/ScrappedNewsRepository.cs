@@ -31,6 +31,7 @@ namespace WladcyKostek.Repo.Repository
                     Title = i.Title,
                     Url = i.Url,
                     ScrappedTime = DateTime.Now,
+                    Base64Img = i.Base64Image
                 })
                 .ToList();
 
@@ -51,7 +52,8 @@ namespace WladcyKostek.Repo.Repository
                     Title = news.Title,
                     Description = news.Description,
                     ImageUrl = news.ImageUrl,
-                    Url = news.Url
+                    Url = news.Url,
+                    Base64Img = news.Base64Img
                 })
                 .ToListAsync();
         }
@@ -66,7 +68,8 @@ namespace WladcyKostek.Repo.Repository
                     Title = news.Title,
                     Description = news.Description,
                     ImageUrl = news.ImageUrl,
-                    Url = news.Url
+                    Url = news.Url,
+                    Base64Img = news.Base64Img
                 })
                 .ToListAsync();
         }
@@ -81,7 +84,8 @@ namespace WladcyKostek.Repo.Repository
                     Title = news.Title,
                     Description = news.Description,
                     ImageUrl = news.ImageUrl,
-                    Url = news.Url
+                    Url = news.Url,
+                    Base64Img = news.Base64Img
                 })
                 .ToListAsync();
         }

@@ -12,6 +12,7 @@ namespace WladcyKostek.Core.Models
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+        public string? Base64Img { get; set; }
         public string? Url { get; set; }
     }
 }
